@@ -1,6 +1,6 @@
 {
   "name": "stroganoff",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Is this password stroganoff, or beef stew?",
   "keywords": [],
   "main": "dist/stroganoff.umd.js",
