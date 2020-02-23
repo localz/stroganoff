@@ -1,4 +1,4 @@
-import Stroganoff from '../src/library'
+import Stroganoff from '../src/stroganoff'
 
 /**
  * Stroganoff
