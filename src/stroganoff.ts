@@ -112,8 +112,8 @@ export default class Stroganoff {
         numbers: this.numberExpression.test(input),
         upper: this.upperExpression.test(input),
         special: this.specialExpression.test(input),
-        minLen: input.length < this.minLen,
-        maxLen: input.length > this.maxLen
+        minLen: input.length > this.minLen,
+        maxLen: input.length < this.maxLen
       }
     }
   }

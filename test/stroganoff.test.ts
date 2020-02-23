@@ -34,6 +34,18 @@ describe('Stroganoff', () => {
   it('should validate good passwords with default options', async () => {
     const stroganoff = new Stroganoff({})
 
-    expect(stroganoff.validate('123wwsssA!').valid).toBe(true)
+    expect(stroganoff.validate('123wwsssAAA!').valid).toBe(true)
+  })
+
+  it('should show the specifics of what is invalid', async () => {
+    const stroganoff = new Stroganoff({})
+
+    expect(stroganoff.validate('').specific).toEqual({
+      maxLen: true,
+      minLen: false,
+      numbers: false,
+      special: false,
+      upper: false
+    })
   })
 })
