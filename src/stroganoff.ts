@@ -101,7 +101,28 @@ export default class Stroganoff {
   }
 
   validate(input: string): StroganoffResult {
-    if (this.expression.test(input)) return { valid: true, message: this.validMessage }
+    const isValid = this.expression.test(input)
+
+    if (isValid && this.specific) {
+      return {
+        valid: true,
+        message: this.validMessage,
+        specific: {
+          numbers: true,
+          upper: true,
+          special: true,
+          minLen: true,
+          maxLen: true
+        }
+      }
+    }
+
+    if (isValid) {
+      return {
+        valid: true,
+        message: this.validMessage
+      }
+    }
 
     if (!this.specific) return { valid: false, message: this.invalidMessage }
 
