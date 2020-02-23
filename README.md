@@ -1,4 +1,4 @@
-# Are your users passwords stroganoff?
+# Are your users' passwords stroganoff?
 
 Install the package:
 
