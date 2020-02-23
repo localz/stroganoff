@@ -1,13 +1,14 @@
 {
   "name": "stroganoff",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Is this password stroganoff, or beef stew?",
-  "keywords": ["password",
+  "keywords": [
+    "password",
     "password-validation",
     "password-validator",
     "typescript",
     "typescript-library"
-    ],
+  ],
   "main": "dist/stroganoff.umd.js",
   "module": "dist/stroganoff.es5.js",
   "typings": "dist/types/stroganoff.d.ts",
