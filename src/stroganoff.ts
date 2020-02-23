@@ -1,0 +1,120 @@
+interface Props {
+  numbers?: number
+  upper?: number
+  minLen?: number
+  maxLen?: number
+  special?: number
+  validMessage?: string
+  invalidMessage?: string
+  specific?: boolean
+}
+
+interface Specific {
+  minLen: boolean
+  maxLen: boolean
+  numbers: boolean
+  upper: boolean
+  special: boolean
+}
+
+interface Result {
+  valid: boolean
+  message: string
+  specific?: Specific
+}
+
+export default class Stroganoff {
+  expression: RegExp
+  upperExpression: RegExp
+  specialExpression: RegExp
+  numberExpression: RegExp
+  numbers: number
+  upper: number
+  minLen: number
+  maxLen: number
+  special: number
+  validMessage: string
+  invalidMessage: string
+  specific: boolean
+
+  constructor({
+    numbers = 1,
+    upper = 1,
+    minLen = 6,
+    maxLen = 64,
+    special = 1,
+    validMessage = 'Your password is stroganoff',
+    invalidMessage = `Beef stew`,
+    specific = true
+  }: Props) {
+    this.numbers = numbers
+    this.upper = upper
+    this.minLen = minLen
+    this.maxLen = maxLen
+    this.special = special
+    this.validMessage = validMessage
+    this.invalidMessage = invalidMessage
+    this.specific = specific
+
+    if (numbers <= 0) {
+      throw new Error('A good password needs numbers. Set numbers to above above 0.')
+    }
+
+    if (upper <= 0) {
+      throw new Error('A good password needs uppercase characters. Set upper to anything above 0.')
+    }
+
+    if (minLen <= 3) {
+      throw new Error(
+        'A good password needs to be longer than 3 characters. Set minLen to anything above 3.'
+      )
+    }
+
+    if (special <= 0) {
+      throw new Error('A good password needs special characters. Set special to anything above 1.')
+    }
+
+    // Required uppercase count
+    const reqUppers = Array(upper)
+      .fill('.*[A-Z]')
+      .join('')
+
+    // Required numbers count
+    const reqNumbers = Array(numbers)
+      .fill('.*[0-9]')
+      .join('')
+
+    // Required special characters count
+    const reqSpecial = Array(numbers)
+      .fill('.*[!@#$&*]')
+      .join('')
+
+    const exp = `^(?=${reqUppers})(?=${reqSpecial})(?=${reqNumbers}).{${minLen},${maxLen}}$`
+
+    this.expression = new RegExp(exp)
+
+    this.upperExpression = new RegExp(`^(?=${reqUppers})`)
+
+    this.specialExpression = new RegExp(`^(?=${reqSpecial})`)
+
+    this.numberExpression = new RegExp(`^(?=${reqNumbers})`)
+  }
+
+  validate(input: string): Result {
+    if (this.expression.test(input)) return { valid: true, message: this.validMessage }
+
+    if (!this.specific) return { valid: false, message: this.invalidMessage }
+
+    return {
+      valid: false,
+      message: this.invalidMessage,
+      specific: {
+        numbers: this.numberExpression.test(input),
+        upper: this.upperExpression.test(input),
+        special: this.specialExpression.test(input),
+        minLen: input.length < this.minLen,
+        maxLen: input.length > this.maxLen
+      }
+    }
+  }
+}
