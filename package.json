@@ -274,7 +274,7 @@
     "create-error-class": "^3.0.2",
     "core-util-is": "^1.0.2",
     "cross-spawn": "^6.0.5",
-    "cosmiconfig": "^5.2.1",
+    "cosmiconfig": "^6.0.0",
     "copy-descriptor": "^0.1.1",
     "crypto-random-string": "^1.0.0",
     "cssom": "^0.3.8",
