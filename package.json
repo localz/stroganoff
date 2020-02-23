@@ -299,7 +299,7 @@
     "defaults": "^1.0.3",
     "deep-extend": "^0.6.0",
     "default-require-extensions": "^1.0.0",
-    "defer-to-connect": "^1.1.3",
+    "defer-to-connect": "^2.0.0",
     "define-properties": "^1.1.3",
     "define-property": "^0.2.5",
     "delegates": "^1.0.0",
