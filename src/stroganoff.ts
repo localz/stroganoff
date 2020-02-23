@@ -44,7 +44,7 @@ export default class Stroganoff {
     maxLen = 64,
     special = 1,
     validMessage = 'Your password is stroganoff',
-    invalidMessage = `Beef stew`,
+    invalidMessage = 'Beef stew',
     specific = true
   }: StroganoffOptions) {
     this.numbers = numbers

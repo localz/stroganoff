@@ -66,7 +66,28 @@ describe('Stroganoff', () => {
        * Default: 6
        * Optional
        */
-      maxLen: 64
+      maxLen: 64,
+
+      /*
+       * Show the specific fields that are invalid
+       * Default: true
+       * Optional
+       */
+      specific: true,
+
+      /*
+       * The message to return for a valid password
+       * Default: 'Your password is stroganoff'
+       * Optional
+       */
+      validMessage: 'Your password is stroganoff',
+
+      /*
+       * The message to return for an invalid password
+       * Default: 'Beef stew'
+       * Optional
+       */
+      invalidMessage: 'Beef stew'
     }
 
     const stroganoff = new Stroganoff({})
