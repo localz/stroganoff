@@ -41,7 +41,7 @@ import Stroganoff, { StroganoffOptions } from 'stroganoff';
 
       /*
        * Maximum password length
-       * Default: 6
+       * Default: 64
        * Optional
        */
       maxLen: 64,
