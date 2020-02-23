@@ -1,4 +1,4 @@
-interface Props {
+export interface StroganoffOptions {
   numbers?: number
   upper?: number
   minLen?: number
@@ -17,7 +17,7 @@ interface Specific {
   special: boolean
 }
 
-interface Result {
+export interface StroganoffResult {
   valid: boolean
   message: string
   specific?: Specific
@@ -46,7 +46,7 @@ export default class Stroganoff {
     validMessage = 'Your password is stroganoff',
     invalidMessage = `Beef stew`,
     specific = true
-  }: Props) {
+  }: StroganoffOptions) {
     this.numbers = numbers
     this.upper = upper
     this.minLen = minLen
@@ -100,7 +100,7 @@ export default class Stroganoff {
     this.numberExpression = new RegExp(`^(?=${reqNumbers})`)
   }
 
-  validate(input: string): Result {
+  validate(input: string): StroganoffResult {
     if (this.expression.test(input)) return { valid: true, message: this.validMessage }
 
     if (!this.specific) return { valid: false, message: this.invalidMessage }
