@@ -82,6 +82,6 @@ export default passwordValidator
 | minLen         | 6                             | Minimum password length                                            | true     |
 | maxLen         | 64                            | Maximum password length                                            | true     |
 | special        | 1                             | Minimum amount of special characters the password should include   | true     |
-| validMessage   | 'Your password is stroganoff' | The message to return for an invalid password                      | true     |
+| validMessage   | 'Your password is stroganoff' | The message to return for a valid password                         | true     |
 | invalidMessage | 'Beef stew'                   | The message to return for an invalid password                      | true     |
 | specific       | true                          | Show the specific fields that are invalid                          | true     |
