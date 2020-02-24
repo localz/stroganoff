@@ -723,7 +723,7 @@
     "p-retry": "^3.0.1",
     "p-map": "^1.2.0",
     "p-try": "^2.2.0",
-    "pacote": "^9.5.12",
+    "pacote": "^11.0.1",
     "parallel-transform": "^1.2.0",
     "parent-module": "^1.0.1",
     "package-json": "^4.0.1",
