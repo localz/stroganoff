@@ -230,7 +230,7 @@
     "chardet": "^0.7.0",
     "caseless": "^0.12.0",
     "chalk": "^2.4.2",
-    "chownr": "^1.1.4",
+    "chownr": "^2.0.0",
     "cidr-regex": "^2.0.10",
     "clean-stack": "^2.2.0",
     "class-utils": "^0.3.6",
