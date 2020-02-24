@@ -967,7 +967,7 @@
     "util-deprecate": "^1.0.2",
     "util-extend": "^1.0.3",
     "util.promisify": "^1.0.1",
-    "uuid": "^3.4.0",
+    "uuid": "^7.0.0",
     "verror": "^1.10.0",
     "utile": "^0.3.0",
     "util-promisify": "^2.1.0",
