@@ -619,7 +619,7 @@
     "make-dir": "^2.1.0",
     "lowercase-keys": "^2.0.0",
     "lru-cache": "^5.1.1",
-    "make-fetch-happen": "^5.0.2",
+    "make-fetch-happen": "^8.0.2",
     "map-age-cleaner": "^0.1.3",
     "map-obj": "^1.0.1",
     "makeerror": "^1.0.11",
