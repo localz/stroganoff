@@ -458,7 +458,7 @@
     "is-cidr": "^3.1.0",
     "is-arrayish": "^0.2.1",
     "is-callable": "^1.1.5",
-    "is-buffer": "^1.1.6",
+    "is-buffer": "^2.0.4",
     "is-date-object": "^1.0.2",
     "is-data-descriptor": "^1.0.0",
     "is-ci": "^1.2.1",
