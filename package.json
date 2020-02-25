@@ -468,7 +468,7 @@
     "is-extendable": "^0.1.1",
     "is-dotfile": "^1.0.3",
     "is-finite": "^1.1.0",
-    "is-extglob": "^1.0.0",
+    "is-extglob": "^2.1.1",
     "is-glob": "^2.0.1",
     "is-generator-fn": "^1.0.0",
     "is-module": "^1.0.0",
