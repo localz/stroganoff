@@ -4,48 +4,170 @@ import Stroganoff, { StroganoffOptions } from '../src/stroganoff'
  * Stroganoff
  */
 describe('Stroganoff', () => {
-  it('should be valid with min length override', async () => {
-    const minLen = 5
-    const stroganoff = new Stroganoff({ minLen })
-
-    const input = 'A!3a#'
-
-    expect(input).toHaveLength(minLen)
-
-    expect(stroganoff.validate('A!3a#').valid).toBe(true)
+  it('should create a new Stroganoff instance', () => {
+    expect(new Stroganoff({})).toBeInstanceOf(Stroganoff)
   })
 
-  it('should validate bad passwords with default options', async () => {
+  describe('given default options', () => {
     const stroganoff = new Stroganoff({})
+    it('should return false when a password is too short', () => {
+      const result = stroganoff.validate('123')
 
-    // Too short
-    expect(stroganoff.validate('123').valid).toBe(false)
+      expect(result.valid).toBe(false)
 
-    // No caps
-    expect(stroganoff.validate('abc12345!').valid).toBe(false)
+      // @ts-ignore
+      expect(result.specific.minLen).toBe(false)
+    })
 
-    // No special characters
-    expect(stroganoff.validate('abc12345A').valid).toBe(false)
+    it('should return false when a password has no numbers', () => {
+      const result = stroganoff.validate('abc')
 
-    // No numbers
-    expect(stroganoff.validate('abcAAA!@#').valid).toBe(false)
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.numbers).toBe(false)
+    })
+
+    it('should return false when a password has no special characters', () => {
+      const result = stroganoff.validate('abc')
+
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.special).toBe(false)
+    })
+
+    it('should return false when a password is too long', () => {
+      const input = Array(65)
+        .fill('aA1!')
+        .join('')
+      const result = stroganoff.validate(input)
+
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.maxLen).toBe(false)
+    })
+
+    it('should return true for a just good enough pasword', () => {
+      const input = 'aB1@Fc'
+      const result = stroganoff.validate(input)
+
+      expect(result.valid).toBe(true)
+
+      // @ts-ignore
+      expect(result.specific.maxLen).toBe(true)
+      // @ts-ignore
+      expect(result.specific.minLen).toBe(true)
+      // @ts-ignore
+      expect(result.specific.special).toBe(true)
+      // @ts-ignore
+      expect(result.specific.numbers).toBe(true)
+    })
   })
 
-  it('should validate good passwords with default options', async () => {
-    const stroganoff = new Stroganoff({})
+  describe('given override options', () => {
+    it('should return false when a password is too short', () => {
+      const stroganoff = new Stroganoff({ minLen: 10 })
+      const input = '123ABC!@#'
+      const result = stroganoff.validate(input)
+      expect(input).toHaveLength(9)
 
-    expect(stroganoff.validate('123wwsssAAA!').valid).toBe(true)
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.minLen).toBe(false)
+    })
+
+    it('should return false when a password does not have enough special chars', () => {
+      const stroganoff = new Stroganoff({ special: 10 })
+      const input = '123ABC!@#'
+      const result = stroganoff.validate(input)
+
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.special).toBe(false)
+    })
+
+    it('should return false when a password does not have enough numbers', () => {
+      const stroganoff = new Stroganoff({ numbers: 4 })
+      const input = '123ABC!@#'
+      const result = stroganoff.validate(input)
+
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.numbers).toBe(false)
+    })
+
+    it('should return false when a password is too long', () => {
+      const stroganoff = new Stroganoff({ maxLen: 20 })
+      const input = Array(21)
+        .fill('aA1!')
+        .join('')
+      const result = stroganoff.validate(input)
+
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific.maxLen).toBe(false)
+    })
   })
 
-  it('should show the specifics of what is invalid', async () => {
-    const stroganoff = new Stroganoff({})
+  describe('given the developer does not want specific details', () => {
+    it('should return true for a valid password', () => {
+      const stroganoff = new Stroganoff({ specific: false })
+      const input = '123ABC!@#'
+      const result = stroganoff.validate(input)
 
-    expect(stroganoff.validate('').specific).toEqual({
-      maxLen: true,
-      minLen: false,
-      numbers: false,
-      special: false,
-      upper: false
+      expect(result.valid).toBe(true)
+
+      // @ts-ignore
+      expect(result.specific).toBeUndefined()
+    })
+
+    it('should return false for an invalid password', () => {
+      const stroganoff = new Stroganoff({ specific: false })
+      const input = 'abc'
+      const result = stroganoff.validate(input)
+
+      expect(result.valid).toBe(false)
+
+      // @ts-ignore
+      expect(result.specific).toBeUndefined()
+    })
+  })
+
+  describe('given the developer inputs bad options', () => {
+    it('should throw if number is less than 1', async () => {
+      expect(() => new Stroganoff({ numbers: 0 })).toThrowErrorMatchingInlineSnapshot(
+        `"A good password needs numbers. Set numbers to above above 0."`
+      )
+    })
+
+    it('should throw if upper is less than 1', async () => {
+      expect(() => new Stroganoff({ upper: 0 })).toThrowErrorMatchingInlineSnapshot(
+        `"A good password needs uppercase characters. Set upper to anything above 0."`
+      )
+    })
+
+    it('should throw if special is less than 1', async () => {
+      expect(() => new Stroganoff({ special: 0 })).toThrowErrorMatchingInlineSnapshot(
+        `"A good password needs special characters. Set special to anything above 1."`
+      )
+    })
+
+    it('should throw if minLen is less than 3', async () => {
+      expect(() => new Stroganoff({ minLen: 2 })).toThrowErrorMatchingInlineSnapshot(
+        `"A good password needs to be longer than 3 characters. Set minLen to anything above 3."`
+      )
+    })
+
+    it('should throw if min length is greater than max length', async () => {
+      expect(() => new Stroganoff({ minLen: 20, maxLen: 10 })).toThrowErrorMatchingInlineSnapshot(
+        `"Your minimum length can not be longer than your maximum length"`
+      )
     })
   })
 })

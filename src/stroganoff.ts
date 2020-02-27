@@ -56,36 +56,40 @@ export default class Stroganoff {
     this.invalidMessage = invalidMessage
     this.specific = specific
 
-    if (numbers <= 0) {
+    if (this.numbers <= 0) {
       throw new Error('A good password needs numbers. Set numbers to above above 0.')
     }
 
-    if (upper <= 0) {
+    if (this.upper <= 0) {
       throw new Error('A good password needs uppercase characters. Set upper to anything above 0.')
     }
 
-    if (minLen <= 3) {
+    if (this.minLen <= 3) {
       throw new Error(
         'A good password needs to be longer than 3 characters. Set minLen to anything above 3.'
       )
     }
 
-    if (special <= 0) {
+    if (this.minLen > this.maxLen) {
+      throw new Error('Your minimum length can not be longer than your maximum length')
+    }
+
+    if (this.special <= 0) {
       throw new Error('A good password needs special characters. Set special to anything above 1.')
     }
 
     // Required uppercase count
-    const reqUppers = Array(upper)
+    const reqUppers = Array(this.upper)
       .fill('.*[A-Z]')
       .join('')
 
     // Required numbers count
-    const reqNumbers = Array(numbers)
+    const reqNumbers = Array(this.numbers)
       .fill('.*[0-9]')
       .join('')
 
     // Required special characters count
-    const reqSpecial = Array(numbers)
+    const reqSpecial = Array(this.special)
       .fill('.*[!@#$&*]')
       .join('')
 
