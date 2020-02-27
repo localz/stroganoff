@@ -826,7 +826,7 @@
     "revalidator": "^0.1.8",
     "right-pad": "^1.0.1",
     "rollup-pluginutils": "^2.8.2",
-    "rsvp": "^3.6.2",
+    "rsvp": "^4.8.5",
     "run-async": "^2.3.0",
     "run-node": "^1.0.0",
     "run-parallel": "^1.1.9",
