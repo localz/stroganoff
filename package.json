@@ -745,7 +745,7 @@
     "pinkie": "^2.0.4",
     "pinkie-promise": "^2.0.1",
     "pirates": "^4.0.1",
-    "pkg-conf": "^2.1.0",
+    "pkg-conf": "^3.1.0",
     "pkg-dir": "^3.0.0",
     "pkginfo": "^0.4.1",
     "please-upgrade-node": "^3.2.0",
