@@ -7049,6 +7049,13 @@ npm-profile@^4.0.2:
     figgy-pudding "^3.4.1"
     npm-registry-fetch "^4.0.0"
 
+npm-profile@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/npm-profile/-/npm-profile-5.0.0.tgz#d32d53f99171e5856542dd5d37832a9ef12b8b74"
+  integrity sha512-JGB1U+YsLFQHpdD6uk+Ei1PNbjB2WKYvZWYLfdUXc9kdFAf+fHVqZ6VwG+CxVUAU7+cE20xmcV4J5Mek66yi+w==
+  dependencies:
+    npm-registry-fetch "^8.0.0"
+
 npm-registry-fetch@^4.0.0, npm-registry-fetch@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-4.0.3.tgz#3c2179e39e04f9348b1c2979545951d36bee8766"
@@ -7066,6 +7073,20 @@ npm-registry-fetch@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-7.0.1.tgz#62ce40812805807ced44ff7497b4b41d3691123c"
   integrity sha512-gUogvusj0xfJSJtK7K+MiGT2NwdqJEknmpAq+OnV7dKLM1TlGEDjJD9Jf20PLiMk1qQfvbwHUKie/lX49xpbjQ==
+  dependencies:
+    "@npmcli/ci-detect" "^1.0.0"
+    lru-cache "^5.1.1"
+    make-fetch-happen "^8.0.2"
+    minipass "^3.0.0"
+    minipass-fetch "^1.1.2"
+    minipass-json-stream "^1.0.1"
+    minizlib "^2.0.0"
+    npm-package-arg "^8.0.0"
+
+npm-registry-fetch@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-8.0.0.tgz#65bb51dd2b9634b8363019aac9c76c003e5c5eaf"
+  integrity sha512-975WwLvZjX97y9UWWQ8nAyr7bw02s9xKPHqvEm5T900LQsB1HXb8Gb9ebYtCBLSX+K8gSOrO5KS/9yV/naLZmQ==
   dependencies:
     "@npmcli/ci-detect" "^1.0.0"
     lru-cache "^5.1.1"
