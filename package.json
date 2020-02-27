@@ -753,7 +753,7 @@
     "prelude-ls": "^1.1.2",
     "pretty-format": "^23.6.0",
     "private": "^0.1.8",
-    "prepend-http": "^2.0.0",
+    "prepend-http": "^3.0.1",
     "preserve": "^0.2.0",
     "process-nextick-args": "^2.0.1",
     "progress": "^2.0.3",
