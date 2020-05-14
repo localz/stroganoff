@@ -641,7 +641,7 @@
     "mime-db": "^1.43.0",
     "mime-types": "^2.1.26",
     "mimic-fn": "^1.2.0",
-    "mimic-response": "^1.0.1",
+    "mimic-response": "^3.1.0",
     "minimatch": "^3.0.4",
     "minimist": "^1.2.0",
     "minimist-options": "^3.0.2",
