@@ -2353,6 +2353,11 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
+chardet@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/chardet/-/chardet-1.2.0.tgz#a1d1c97df9aa6517d3965ff193b5087f33fa98a3"
+  integrity sha512-ks9x93utxiilvtGa+Rl6+5dOxAw75Z2Jp7lRuP3jViMA+IpxbHoq7e4v5CHZ08KQuutWsIaOlUVriBmUiyesig==
+
 chownr@^1.1.1, chownr@^1.1.2, chownr@^1.1.3, chownr@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
