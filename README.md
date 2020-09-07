@@ -65,7 +65,7 @@ import Stroganoff, { StroganoffOptions } from 'stroganoff';
        * Default: 'Beef stew'
        * Optional
        */
-      invalidMessage: 'Beef stew'
+      invalidMessage: 'Beef Leek stew'
     }
 
 const passwordValidator = new Stroganoff(options);
@@ -83,5 +83,5 @@ export default passwordValidator
 | maxLen         | 64                            | Maximum password length                                            | true     |
 | special        | 1                             | Minimum amount of special characters the password should include   | true     |
 | validMessage   | 'Your password is stroganoff' | The message to return for a valid password                         | true     |
-| invalidMessage | 'Beef stew'                   | The message to return for an invalid password                      | true     |
+| invalidMessage | '~~Beef~~ Leek stew'          | The message to return for an invalid password                      | true     |
 | specific       | true                          | Show the specific fields that are invalid                          | true     |
