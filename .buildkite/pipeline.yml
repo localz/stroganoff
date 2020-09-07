@@ -1,5 +1,5 @@
 env:
-  NODE_VERSION: "8"
+  NODE_VERSION: "10.18"
 
 steps:
   - label: ":hammer: Build and Test"
