@@ -859,7 +859,7 @@
     "snapdragon-node": "^2.1.1",
     "snapdragon-util": "^3.0.1",
     "socks": "^2.3.3",
-    "socks-proxy-agent": "^4.0.2",
+    "socks-proxy-agent": "^5.0.0",
     "sorted-object": "^2.0.1",
     "sorted-union-stream": "^3.0.1",
     "source-map": "^0.5.7",
