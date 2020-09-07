@@ -314,7 +314,7 @@
     "dir-glob": "^3.0.1",
     "doctrine": "^3.0.0",
     "domexception": "^1.0.1",
-    "dot-prop": "^3.0.0",
+    "dot-prop": "^5.1.1",
     "dotenv": "^5.0.1",
     "duplexer2": "^0.1.4",
     "duplexer3": "^0.1.4",
