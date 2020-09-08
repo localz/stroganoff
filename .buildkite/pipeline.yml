@@ -22,7 +22,7 @@ steps:
     if: build.tag != null
     commands:
       - npm config set "//registry.npmjs.org/:_authToken" $${NPM_TOKEN}
-      - npm build
+      - npm run-script build
       - npm publish
     plugins:
       - docker-login#v2.0.1:
