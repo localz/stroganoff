@@ -1,10 +1,20 @@
 # Are your users' passwords stroganoff?
+Don't let your users be Russian their passwords, make sure they're stroganoff.
+
+- [x] Validate passwords server-side
+- [x] Validate passwords client-side
+- [x] Validate passwords as the user types
+- [x] Validate passwords on submit  
+
+![](https://i.imgur.com/fuMVrbq.gif)
 
 Install the package:
 
 ```bash
 yarn add stroganoff
 ```
+
+### Setup
 Create your own password validator with custom options:
 
 ```javascript
@@ -65,12 +75,34 @@ import Stroganoff, { StroganoffOptions } from 'stroganoff';
        * Default: 'Beef stew'
        * Optional
        */
-      invalidMessage: 'Beef Leek stew'
+      invalidMessage: 'Beef stew'
     }
 
 const passwordValidator = new Stroganoff(options);
 
 export default passwordValidator
+```
+
+
+### Validating passwords:
+```javascript
+const myPassword = '123abc';
+
+/* 
+{
+  "valid": false,
+  "message": "Beef Leek stew",
+  "specific": {
+    "numbers": true,
+    "upper": false,
+    "special": false,
+    "minLen": false,
+    "maxLen": true
+  }
+}
+*/
+const result = passwordValidator.validate(myPassword)
+
 ```
 
 

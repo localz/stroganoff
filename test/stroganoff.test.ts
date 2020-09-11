@@ -38,9 +38,7 @@ describe('Stroganoff', () => {
     })
 
     it('should return false when a password is too long', () => {
-      const input = Array(65)
-        .fill('aA1!')
-        .join('')
+      const input = Array(65).fill('aA1!').join('')
       const result = stroganoff.validate(input)
 
       expect(result.valid).toBe(false)
@@ -103,9 +101,7 @@ describe('Stroganoff', () => {
 
     it('should return false when a password is too long', () => {
       const stroganoff = new Stroganoff({ maxLen: 20 })
-      const input = Array(21)
-        .fill('aA1!')
-        .join('')
+      const input = Array(21).fill('aA1!').join('')
       const result = stroganoff.validate(input)
 
       expect(result.valid).toBe(false)
@@ -168,6 +164,14 @@ describe('Stroganoff', () => {
       expect(() => new Stroganoff({ minLen: 20, maxLen: 10 })).toThrowErrorMatchingInlineSnapshot(
         `"Your minimum length can not be longer than your maximum length"`
       )
+    })
+  })
+
+  describe('given the input has multiple special characters', () => {
+    const stroganoff = new Stroganoff({})
+
+    it('should still validate as true', () => {
+      expect(stroganoff.validate('123ABCabc!@#').valid).toBeTruthy()
     })
   })
 })
