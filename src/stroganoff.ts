@@ -98,10 +98,6 @@ export default class Stroganoff {
     this.numberExpression = new RegExp(`^(?=${reqNumbers})`)
   }
 
-  pattern() {
-    return this.expression
-  }
-
   validate(input: string): StroganoffResult {
     const isValid = this.expression.test(input)
 

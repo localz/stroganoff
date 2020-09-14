@@ -1,9 +1,16 @@
-import Stroganoff, { StroganoffOptions } from '../src/stroganoff'
+import Stroganoff from '../src/stroganoff'
 
 /**
  * Stroganoff
  */
 describe('Stroganoff', () => {
+  it('should return the validation expression', () => {
+    const stroganoff = new Stroganoff({})
+    expect(String(stroganoff.expression)).toBe('/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{12,64}$/')
+
+    expect(new RegExp(stroganoff.expression)).toBeTruthy()
+  })
+
   it('should create a new Stroganoff instance', () => {
     expect(new Stroganoff({})).toBeInstanceOf(Stroganoff)
   })
