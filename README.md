@@ -44,10 +44,10 @@ import Stroganoff, { StroganoffOptions } from 'stroganoff';
 
       /*
        * Minimum password length
-       * Default: 1
+       * Default: 12
        * Optional
        */
-      minLen: 6,
+      minLen: 12,
 
       /*
        * Maximum password length
@@ -111,7 +111,7 @@ const result = passwordValidator.validate(myPassword)
 |----------------|-------------------------------|--------------------------------------------------------------------|----------|
 | numbers        | 1                             | Minimum amount of numbers the password should include              | true     |
 | upper          | 1                             | Minimum amount of uppercase characters the password should include | true     |
-| minLen         | 6                             | Minimum password length                                            | true     |
+| minLen         | 12                            | Minimum password length                                            | true     |
 | maxLen         | 64                            | Maximum password length                                            | true     |
 | special        | 1                             | Minimum amount of special characters the password should include   | true     |
 | validMessage   | 'Your password is stroganoff' | The message to return for a valid password                         | true     |

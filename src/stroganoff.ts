@@ -40,12 +40,12 @@ export default class Stroganoff {
   constructor({
     numbers = 1,
     upper = 1,
-    minLen = 6,
+    minLen = 12,
     maxLen = 64,
     special = 1,
     validMessage = 'Your password is stroganoff',
     invalidMessage = 'Beef stew',
-    specific = true
+    specific = true,
   }: StroganoffOptions) {
     this.numbers = numbers
     this.upper = upper
@@ -79,19 +79,13 @@ export default class Stroganoff {
     }
 
     // Required uppercase count
-    const reqUppers = Array(this.upper)
-      .fill('.*[A-Z]')
-      .join('')
+    const reqUppers = Array(this.upper).fill('.*[A-Z]').join('')
 
     // Required numbers count
-    const reqNumbers = Array(this.numbers)
-      .fill('.*[0-9]')
-      .join('')
+    const reqNumbers = Array(this.numbers).fill('.*[0-9]').join('')
 
     // Required special characters count
-    const reqSpecial = Array(this.special)
-      .fill('.*[!@#$&*]')
-      .join('')
+    const reqSpecial = Array(this.special).fill('.*[!@#$&*]').join('')
 
     const exp = `^(?=${reqUppers})(?=${reqSpecial})(?=${reqNumbers}).{${minLen},${maxLen}}$`
 
@@ -102,6 +96,10 @@ export default class Stroganoff {
     this.specialExpression = new RegExp(`^(?=${reqSpecial})`)
 
     this.numberExpression = new RegExp(`^(?=${reqNumbers})`)
+  }
+
+  pattern() {
+    return this.expression
   }
 
   validate(input: string): StroganoffResult {
@@ -116,15 +114,15 @@ export default class Stroganoff {
           upper: true,
           special: true,
           minLen: true,
-          maxLen: true
-        }
+          maxLen: true,
+        },
       }
     }
 
     if (isValid) {
       return {
         valid: true,
-        message: this.validMessage
+        message: this.validMessage,
       }
     }
 
@@ -138,8 +136,8 @@ export default class Stroganoff {
         upper: this.upperExpression.test(input),
         special: this.specialExpression.test(input),
         minLen: input.length > this.minLen,
-        maxLen: input.length < this.maxLen
-      }
+        maxLen: input.length < this.maxLen,
+      },
     }
   }
 }
