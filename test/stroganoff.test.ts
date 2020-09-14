@@ -48,7 +48,7 @@ describe('Stroganoff', () => {
     })
 
     it('should return true for a just good enough pasword', () => {
-      const input = 'aB1@Fc'
+      const input = 'aB1@FcaB1@Fc'
       const result = stroganoff.validate(input)
 
       expect(result.valid).toBe(true)
@@ -114,7 +114,7 @@ describe('Stroganoff', () => {
   describe('given the developer does not want specific details', () => {
     it('should return true for a valid password', () => {
       const stroganoff = new Stroganoff({ specific: false })
-      const input = '123ABC!@#'
+      const input = '123ABC!@#aB1@Fc'
       const result = stroganoff.validate(input)
 
       expect(result.valid).toBe(true)
