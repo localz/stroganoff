@@ -105,6 +105,28 @@ const result = passwordValidator.validate(myPassword)
 
 ```
 
+### With Joi
+Stroganoff exposes a regex expression that matches your password strength requirements. You can use the expression in your Joi validation.
+ ```javascript
+ const schema = {
+  name: Joi.string().required(),
+  password: Joi.string().pattern(validatePassword.expression)
+}
+```
+
+### With Yup
+```javascript
+const schema = yup.object({
+  name: yup.string().required('Name is required'),
+  password: yup
+    .string()
+    .required('Password is a required field')
+    .matches(passwordValidator.expression, 'Password is not strong enough')
+})
+```
+
+
+
 
 ### Options
 | Option         | Default                       | Description                                                        | Optional |
