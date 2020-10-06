@@ -85,7 +85,7 @@ export default class Stroganoff {
     const reqNumbers = Array(this.numbers).fill('.*[0-9]').join('')
 
     // Required special characters count
-    const reqSpecial = Array(this.special).fill('.*[!@#$&*]').join('')
+    const reqSpecial = Array(this.special).fill('.*[!@#$%()&*]').join('')
 
     const exp = `^(?=${reqUppers})(?=${reqSpecial})(?=${reqNumbers}).{${minLen},${maxLen}}$`
 

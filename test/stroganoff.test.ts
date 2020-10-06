@@ -6,7 +6,9 @@ import Stroganoff from '../src/stroganoff'
 describe('Stroganoff', () => {
   it('should return the validation expression', () => {
     const stroganoff = new Stroganoff({})
-    expect(String(stroganoff.expression)).toBe('/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{12,64}$/')
+    expect(String(stroganoff.expression)).toBe(
+      '/^(?=.*[A-Z])(?=.*[!@#$%()&*])(?=.*[0-9]).{12,64}$/'
+    )
 
     expect(new RegExp(stroganoff.expression)).toBeTruthy()
   })
@@ -17,6 +19,7 @@ describe('Stroganoff', () => {
 
   describe('given default options', () => {
     const stroganoff = new Stroganoff({})
+
     it('should return false when a password is too short', () => {
       const result = stroganoff.validate('123')
 
@@ -54,7 +57,7 @@ describe('Stroganoff', () => {
       expect(result.specific.maxLen).toBe(false)
     })
 
-    it('should return true for a just good enough pasword', () => {
+    it('should return true for a just good enough password', () => {
       const input = 'aB1@FcaB1@Fc'
       const result = stroganoff.validate(input)
 
@@ -68,6 +71,11 @@ describe('Stroganoff', () => {
       expect(result.specific.special).toBe(true)
       // @ts-ignore
       expect(result.specific.numbers).toBe(true)
+    })
+
+    it('should allow % and () characters', () => {
+      expect(stroganoff.validate('123ABC%123abc')).toBeTruthy()
+      expect(stroganoff.validate('123ABC(123abc')).toBeTruthy()
     })
   })
 
