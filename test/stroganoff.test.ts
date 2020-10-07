@@ -7,7 +7,7 @@ describe('Stroganoff', () => {
   it('should return the validation expression', () => {
     const stroganoff = new Stroganoff({})
     expect(String(stroganoff.expression)).toBe(
-      '/^(?=.*[A-Z])(?=.*[!@#$%()&*])(?=.*[0-9]).{12,64}$/'
+      '/^(?=.*[A-Z])(?=.*[!@#$%()&*-^=+;<>?])(?=.*[0-9]).{12,64}$/'
     )
 
     expect(new RegExp(stroganoff.expression)).toBeTruthy()
@@ -58,7 +58,7 @@ describe('Stroganoff', () => {
     })
 
     it('should return true for a just good enough password', () => {
-      const input = 'aB1@FcaB1@Fc'
+      const input = '123Abc!abcef'
       const result = stroganoff.validate(input)
 
       expect(result.valid).toBe(true)
@@ -73,9 +73,13 @@ describe('Stroganoff', () => {
       expect(result.specific.numbers).toBe(true)
     })
 
-    it('should allow % and () characters', () => {
-      expect(stroganoff.validate('123ABC%123abc')).toBeTruthy()
-      expect(stroganoff.validate('123ABC(123abc')).toBeTruthy()
+    const characters = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~<>?~'.split('').map((char) => char)
+    const basePassword = 'Abc1asdfgfe'
+
+    test.each(characters)('Accept special character %s', (char) => {
+      expect(true).toBe(true)
+
+      expect(stroganoff.validate(`${basePassword}${char}`)).toBeTruthy()
     })
   })
 
@@ -105,13 +109,18 @@ describe('Stroganoff', () => {
 
     it('should return false when a password does not have enough numbers', () => {
       const stroganoff = new Stroganoff({ numbers: 4 })
-      const input = '123ABC!@#'
-      const result = stroganoff.validate(input)
+      const weakPassword = '123ABC!@#'
+      const stringPassword = '1234ABC!@#ab'
 
-      expect(result.valid).toBe(false)
+      expect(stroganoff.validate(weakPassword).valid).toBe(false)
 
       // @ts-ignore
-      expect(result.specific.numbers).toBe(false)
+      expect(stroganoff.validate(weakPassword).specific.numbers).toBe(false)
+
+      expect(stroganoff.validate(stringPassword).valid).toBe(true)
+
+      // @ts-ignore
+      expect(stroganoff.validate(stringPassword).specific.numbers).toBe(true)
     })
 
     it('should return false when a password is too long', () => {
