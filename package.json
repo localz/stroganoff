@@ -87,7 +87,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "26.5.2",
+    "jest": "26.5.3",
     "ts-jest": "26.4.1"
   },
   "directories": {
