@@ -17,6 +17,16 @@ describe('Stroganoff', () => {
     expect(new Stroganoff({})).toBeInstanceOf(Stroganoff)
   })
 
+  describe('given Melvin enters some weird passwords', () => {
+    it('should be true for pzbhef-1Gonvo-daftyb', () => {
+      const stroganoff = new Stroganoff({})
+
+      const result = stroganoff.validate('pzbhef-1Gonvo-daftyb')
+
+      expect(result.valid).toBe(true)
+    })
+  })
+
   describe('given default options', () => {
     const stroganoff = new Stroganoff({})
 
