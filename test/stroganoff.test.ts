@@ -1,3 +1,4 @@
+import { v1 as uuidv1, v3 as uuidv3, v4 as uuidv4, v5 as uuidv5 } from 'uuid'
 import Stroganoff from '../src/stroganoff'
 
 /**
@@ -206,6 +207,67 @@ describe('Stroganoff', () => {
 
     it('should still validate as true', () => {
       expect(stroganoff.validate('123ABCabc!@#').valid).toBeTruthy()
+    })
+  })
+
+  describe('given the password is a uuid', () => {
+    const stroganoff = new Stroganoff({ uuid: true })
+
+    const v1Ids = [
+      'c7ddcbd0-9913-11ec-b909-0242ac120002',
+      '72631062-9912-11ec-b909-0242ac120002',
+      '2f01f7d8-9913-11ec-b909-0242ac120002',
+      'c00a462c-9913-11ec-b909-0242ac120002',
+      'cee2752a-9913-11ec-b909-0242ac120002',
+      'd5143460-9913-11ec-b909-0242ac120002',
+      'da21730a-9913-11ec-b909-0242ac120002',
+    ]
+
+    it.each(v1Ids)('uuid v1(%s)', (a) => {
+      expect(stroganoff.validate(a).valid).toBeTruthy()
+
+      const invalid = a.substring(0, Math.floor(Math.random() * a.length))
+      expect(stroganoff.validate(invalid).valid).toBeFalsy()
+    })
+
+    const v3Ids = Array(100)
+      .fill(null)
+      .map(() => {
+        const namespace = uuidv1()
+        const name = uuidv1()
+        return uuidv3(name, namespace)
+      })
+
+    it.each(v3Ids)('uuid v3(%s)', (a) => {
+      expect(stroganoff.validate(a).valid).toBeTruthy()
+      const invalid = a.substring(0, Math.floor(Math.random() * a.length))
+      expect(stroganoff.validate(invalid).valid).toBeFalsy()
+    })
+
+    const v4Ids = Array(100)
+      .fill(null)
+      .map(() => {
+        return uuidv4()
+      })
+
+    it.each(v4Ids)('uuid v4(%s)', (a) => {
+      expect(stroganoff.validate(a).valid).toBeTruthy()
+      const invalid = a.substring(0, Math.floor(Math.random() * a.length))
+      expect(stroganoff.validate(invalid).valid).toBeFalsy()
+    })
+
+    const v5Ids = Array(100)
+      .fill(null)
+      .map(() => {
+        const namespace = uuidv1()
+        const name = uuidv1()
+        return uuidv5(name, namespace)
+      })
+
+    it.each(v5Ids)('uuid v5(%s)', (a) => {
+      expect(stroganoff.validate(a).valid).toBeTruthy()
+      const invalid = a.substring(0, Math.floor(Math.random() * a.length))
+      expect(stroganoff.validate(invalid).valid).toBeFalsy()
     })
   })
 })
