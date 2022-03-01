@@ -26,6 +26,7 @@ export interface StroganoffResult {
 }
 
 // Regular expression to check if string is a valid UUID
+// https://melvingeorge.me/blog/check-if-string-valid-uuid-regex-javascript
 const uuidRegex =
   /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/
 
