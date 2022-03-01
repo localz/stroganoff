@@ -1,4 +1,5 @@
 export interface StroganoffOptions {
+  uuid?: boolean
   numbers?: number
   upper?: number
   minLen?: number
@@ -10,11 +11,12 @@ export interface StroganoffOptions {
 }
 
 interface Specific {
-  minLen: boolean
-  maxLen: boolean
-  numbers: boolean
-  upper: boolean
-  special: boolean
+  uuid?: boolean
+  minLen?: boolean
+  maxLen?: boolean
+  numbers?: boolean
+  upper?: boolean
+  special?: boolean
 }
 
 export interface StroganoffResult {
@@ -23,11 +25,16 @@ export interface StroganoffResult {
   specific?: Specific
 }
 
+// Regular expression to check if string is a valid UUID
+const uuidRegex =
+  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/
+
 export default class Stroganoff {
   expression: RegExp
   upperExpression: RegExp
   specialExpression: RegExp
   numberExpression: RegExp
+  uuid: boolean
   numbers: number
   upper: number
   minLen: number
@@ -38,6 +45,7 @@ export default class Stroganoff {
   specific: boolean
 
   constructor({
+    uuid = false,
     numbers = 1,
     upper = 1,
     minLen = 12,
@@ -47,6 +55,7 @@ export default class Stroganoff {
     invalidMessage = 'Beef stew',
     specific = true,
   }: StroganoffOptions) {
+    this.uuid = uuid
     this.numbers = numbers
     this.upper = upper
     this.minLen = minLen
@@ -98,9 +107,30 @@ export default class Stroganoff {
     this.numberExpression = new RegExp(`^(?=${reqNumbers})`)
   }
 
+  private validateUUID(str: string) {
+    // Do some tests before the regex so not just anything gets passed into regex
+    if (str.length !== 36 || str.split('-').length !== 5) {
+      return false
+    }
+
+    // Final test with regex
+    return uuidRegex.test(str)
+  }
+
   validate(input: string): StroganoffResult {
+    if (this.uuid && this.validateUUID(input.toLocaleLowerCase())) {
+      return {
+        valid: true,
+        message: this.validMessage,
+        specific: {
+          uuid: true,
+        },
+      }
+    }
+
     const isValid = this.expression.test(input)
 
+    // Password is valid & return specifics
     if (isValid && this.specific) {
       return {
         valid: true,
@@ -115,6 +145,7 @@ export default class Stroganoff {
       }
     }
 
+    // Password is valid but don't return any specifics
     if (isValid) {
       return {
         valid: true,
@@ -122,6 +153,7 @@ export default class Stroganoff {
       }
     }
 
+    // Password is
     if (!this.specific) return { valid: false, message: this.invalidMessage }
 
     return {
